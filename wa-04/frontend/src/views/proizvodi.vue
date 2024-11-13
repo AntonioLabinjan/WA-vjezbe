@@ -51,24 +51,25 @@
           <form class="mt-10" @submit.prevent="posaljiNarudzbu">
             <!-- Color Choices -->
             <div>
-              <h3 class="text-sm font-medium text-gray-900">Boje</h3>
-              <fieldset aria-label="Choose a color" class="mt-4">
-                <div class="flex items-center space-x-3">
-                  <label v-for="boja in proizvod.boja" :key="boja" class="relative flex items-center justify-center cursor-pointer rounded-full p-0.5">
-                    <input type="radio" name="color-choice" :value="boja" v-model="selectedColor" class="sr-only" />
-                    <span :style="{backgroundColor: boja}" class="h-8 w-8 rounded-full border border-black border-opacity-10"></span>
-                  </label>
-                </div>
-              </fieldset>
-            </div>
+  <h3 class="text-sm font-medium text-gray-900">Boje</h3>
+  <fieldset aria-label="Choose a color" class="mt-4">
+    <div class="flex items-center space-x-3">
+      <label v-for="boja in proizvod.boje" :key="boja" class="relative flex items-center justify-center cursor-pointer rounded-full p-0.5">
+  <input type="radio" name="color-choice" :value="boja" v-model="selectedColor" class="sr-only" />
+  <span :style="{ backgroundColor: boja }" class="h-8 w-8 rounded-full border border-black border-opacity-10"></span>
+</label>
+    </div>
+  </fieldset>
+</div>
 
             <!-- Size Choices -->
             <div v-for="velicina in proizvod.velicine" :key="velicina" class="mt-4">
-              <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6">
-                <input type="radio" name="size-choice" :value="velicina" v-model="selectedSize" class="sr-only" />
-                <span>{{ velicina }}</span>
-              </label>
-            </div>
+  <h3 class="text-sm font-medium text-gray-900">Velicine</h3> <!-- Added heading here -->
+  <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6">
+    <input type="radio" name="size-choice" :value="velicina" v-model="selectedSize" class="sr-only" />
+    <span>{{ velicina }}</span>
+  </label>
+</div>
 
             <!-- Add to Cart Button -->
             <button type="submit" class="mt-10 w-full rounded-md bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none">
