@@ -1,3 +1,3 @@
 #### repo s vjezbama iz WA
 
-## SAMO DA SE PODOMISLIN ZA POLE. BACKEND DELA SVE DOBRO, FRONTEND JE ZBREJKAN
+riješen zadatak...izgleda grdo,ali dela. Commitan pole
