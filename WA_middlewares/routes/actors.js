@@ -8,7 +8,7 @@ const sanitizeInput = (req, res, next) => {
     req.params.name = req.params.name.trim();
   }
   if (req.body.name) {
-    req.body.name = req.body.name.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;"); // Prevent XSS by replacing < and > signs
+    req.body.name = req.body.name.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;"); 
   }
   next();
 };
@@ -17,7 +17,7 @@ const router = express.Router();
 
 router.get('/:name', 
   [
-    param('name').isString().withMessage('Name must be a string'),
+    param('name').isString().withMessage('Ime mora bit string'),
   ],
   sanitizeInput,
   (req, res) => {
@@ -34,7 +34,7 @@ router.get('/:name',
 
 router.get('/:id', 
   [
-    param('id').isInt().withMessage('ID must be an integer'),
+    param('id').isInt().withMessage('ID mora bit cijeli broj'),
   ], 
   sanitizeInput,
   findActorById, 
@@ -50,8 +50,8 @@ router.get('/:id',
 
 router.post('/', 
   [
-    check('name').notEmpty().withMessage('Name is required').isString().withMessage('Name must be a string'),
-    check('birthYear').notEmpty().withMessage('BirthYear is required').isInt({ min: 1900, max: new Date().getFullYear() }).withMessage('BirthYear must be a valid integer between 1900 and the current year'),
+    check('name').notEmpty().withMessage('Nemaš ime, a triba ti').isString().withMessage('Ime mora bit string'),
+    check('birthYear').notEmpty().withMessage('Nemaš godinu rođenja, a triba ti').isInt({ min: 1900, max: new Date().getFullYear() }).withMessage('Godina mora bit integer u rasponu od 1900 do 2025'),
   ],
   sanitizeInput,
   (req, res) => {
@@ -62,24 +62,24 @@ router.post('/',
 
     const { id, name, birthYear, movies } = req.body;
     if (!id) {
-      return res.status(400).json({ error: 'Missing required field: id' });
+      return res.status(400).json({ error: 'Fali ti id' });
     }
 
     actors.push({ id, name, birthYear, movies: movies || [] });
-    res.status(201).json({ message: 'Actor added', actor: { id, name, birthYear, movies: movies || [] } });
+    res.status(201).json({ message: 'Glumac dodan', actor: { id, name, birthYear, movies: movies || [] } });
   }
 );
 
 router.patch('/:id', 
   findActorById, 
   [
-    check('name').optional().isString().withMessage('Name must be a string'),
-    check('birthYear').optional().isInt({ min: 1900, max: new Date().getFullYear() }).withMessage('BirthYear must be a valid integer between 1900 and the current year'),
+    check('name').optional().isString().withMessage('Ime mora bit string'),
+    check('birthYear').optional().isInt({ min: 1900, max: new Date().getFullYear() }).withMessage('Godina mora bit integer u rasponu od 1900 do 2025'),
   ], 
   sanitizeInput,
   (req, res) => {
     if (!req.body.name && !req.body.birthYear) {
-      return res.status(400).json({ error: 'At least one of name or birthYear is required to update' });
+      return res.status(400).json({ error: 'Fale podaci za updt' });
     }
   
     const errors = validationResult(req);
@@ -92,7 +92,7 @@ router.patch('/:id',
     if (birthYear) req.actor.birthYear = birthYear;
     if (movies) req.actor.movies = movies;
   
-    res.json({ message: 'Actor updated', actor: req.actor });
+    res.json({ message: 'Glumac azuriran', actor: req.actor });
   }
 );
 
