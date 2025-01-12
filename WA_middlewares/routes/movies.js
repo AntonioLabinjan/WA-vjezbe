@@ -19,17 +19,17 @@ router.use(sanitizeInput);
 
 router.get('/', 
   [
-    query('min_year').optional().isInt().withMessage('min_year must be an integer'),
-    query('max_year').optional().isInt().withMessage('max_year must be an integer'),
+    query('min_year').optional().isInt().withMessage('min_year mora bit integer'),
+    query('max_year').optional().isInt().withMessage('max_year mora bit integer'),
     query('min_year').optional().custom((value, { req }) => {
       if (req.query.max_year && parseInt(value) >= parseInt(req.query.max_year)) {
-        throw new Error('min_year must be less than max_year');
+        throw new Error('min mora bit manji nego max');
       }
       return true;
     }),
     query('max_year').optional().custom((value, { req }) => {
       if (req.query.min_year && parseInt(value) <= parseInt(req.query.min_year)) {
-        throw new Error('max_year must be greater than min_year');
+        throw new Error('max mora bit veći nego min');
       }
       return true;
     }),
@@ -59,7 +59,7 @@ router.get('/',
 
 router.get('/:id', 
   [
-    param('id').isInt().withMessage('ID must be an integer'),
+    param('id').isInt().withMessage('ID mora bit cijeli broj'),
   ],
   findMovieById,
   (req, res) => {
@@ -75,10 +75,10 @@ router.get('/:id',
 router.post(
   '/',
   [
-    check('title').notEmpty().withMessage('Title is required'),
-    check('year').isInt({ min: 1800, max: new Date().getFullYear() }).withMessage('Year must be a valid number'),
-    check('genre').notEmpty().withMessage('Genre is required'),
-    check('director').notEmpty().withMessage('Director is required')
+    check('title').notEmpty().withMessage('Nemaš title, a triba ti'),
+    check('year').isInt({ min: 1800, max: new Date().getFullYear() }).withMessage('Godina mora bit validan broj'),
+    check('genre').notEmpty().withMessage('Nemaš genre, a triba ti'),
+    check('director').notEmpty().withMessage('Nemaš directora, a triba ti')
   ],
   (req, res) => {
     const errors = validationResult(req);
@@ -89,17 +89,17 @@ router.post(
     const { id, title, year, genre, director } = req.body;
     const newMovie = { id, title, year, genre, director };
     movies.push(newMovie);
-    res.status(201).json({ message: 'Movie added', movie: newMovie });
+    res.status(201).json({ message: 'Dodan film', movie: newMovie });
   }
 );
 
 router.patch('/:id', 
   findMovieById,
   [
-    check('title').optional().isString().withMessage('Title must be a string'),
-    check('year').optional().isInt({ min: 1900, max: new Date().getFullYear() }).withMessage('Year must be a valid integer between 1900 and the current year'),
-    check('genre').optional().isString().withMessage('Genre must be a string'),
-    check('director').optional().isString().withMessage('Director must be a string'),
+    check('title').optional().isString().withMessage('Title mora bit string'),
+    check('year').optional().isInt({ min: 1900, max: new Date().getFullYear() }).withMessage('Godina mora bit integer u rasponu od 1900 do 2025'),
+    check('genre').optional().isString().withMessage('Genre mora bit string'),
+    check('director').optional().isString().withMessage('Director mora bit string'),
   ], 
   (req, res) => {
     const errors = validationResult(req);
@@ -113,7 +113,7 @@ router.patch('/:id',
     if (genre) req.movie.genre = genre;
     if (director) req.movie.director = director;
 
-    res.json({ message: 'Movie updated', movie: req.movie });
+    res.json({ message: 'Film azuriran', movie: req.movie });
   }
 );
 
