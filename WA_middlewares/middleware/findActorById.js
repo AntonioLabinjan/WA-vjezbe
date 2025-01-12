@@ -5,7 +5,7 @@ export function findActorById(req, res, next) {
   const actor = actors.find(a => a.id === actorId);
 
   if (!actor) {
-    return res.status(404).json({ error: 'Actor not found' });
+    return res.status(404).json({ error: 'Ni glumca' });
   }
 
   req.actor = actor; 
