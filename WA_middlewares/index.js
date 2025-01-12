@@ -19,5 +19,5 @@ app.use('/movies', moviesRouter);
 app.use('/actors', actorsRouter);
 
 app.listen(port, () => {
-  console.log(`Movie server is running on http://localhost:${port}`);
+  console.log(`Server dela na http://localhost:${port}`);
 });
