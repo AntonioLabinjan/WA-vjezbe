@@ -1,6 +1,7 @@
 const movies = [
     { id: 4222334, title: 'The Shawshank Redemption', year: 1994, genre: 'Drama', director: 'Frank Darabont' },
     { id: 5211223, title: 'The Godfather', year: 1972, genre: 'Crime', director: 'Francis Ford Coppola' },
+    { id: 6553565, title: 'Zgorija san', year: 2024, genre: 'Comedy', director: 'Ja osobno'},
     { id: 4123123, title: 'The Dark Knight', year: 2008, genre: 'Action', director: 'Christopher Nolan' },
   ];
   
